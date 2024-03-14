@@ -40,7 +40,7 @@ const NavBar = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu menu-lg p-4 w-80 min-h-full bg-base-200">
+        <ul className="menu menu-lg p-4 pt-20 w-80 min-h-full bg-base-200">
           {/* Sidebar content here */}
           {sideBarItems.map((item, index) => {
             return (
