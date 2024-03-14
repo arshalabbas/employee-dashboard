@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .main-container {
+        @apply flex min-h-screen flex-1 flex-col px-6 pb-10 pt-6 max-md:pb-32 sm:px-10;
+      }
+
+      .text-head {
+        @apply text-3xl font-bold;
+      }
+      .text-subtl {
+        @apply text-lg text-primary;
+      }
+      .text-sub-head {
+        @apply font-semibold text-xl;
+      }
+}
