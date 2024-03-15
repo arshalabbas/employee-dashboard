@@ -58,14 +58,39 @@ export async function updateEmployee({
 }
 
 // function to fetch all employeees
-export async function fetchAllEmployees() {
+export async function fetchEmployees() {
   try {
     connectToDB();
-    const employeesData = await Employee.find().sort({ date: "desc" });
+    const employeesData = await Employee.find().sort({
+      date: "desc",
+    });
 
     return employeesData;
   } catch (error: any) {
     throw new Error(`Error fetching all employees: ${error.message}`);
+  }
+}
+
+// function to search Employees by search query
+export async function fetchFilteredEmployees(searchQuery: string) {
+  try {
+    connectToDB();
+
+    const mongooseQuery = Employee.find({
+      $or: [
+        { name: { $regex: searchQuery, $options: "i" } },
+        { email: { $regex: searchQuery, $options: "i" } },
+        { phone: { $regex: searchQuery, $options: "i" } },
+        { jobTitle: { $regex: searchQuery, $options: "i" } },
+        { department: { $regex: searchQuery, $options: "i" } },
+        { salary: { $regex: searchQuery, $options: "i" } },
+      ],
+    });
+
+    const data = mongooseQuery.exec();
+    return data;
+  } catch (error: any) {
+    throw new Error(`Error searching employees: ${error.message}`);
   }
 }
 

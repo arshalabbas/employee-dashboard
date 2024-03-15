@@ -1,19 +1,11 @@
-import { StringValidation } from "zod";
+import {
+  fetchEmployees,
+  fetchFilteredEmployees,
+} from "@/lib/actions/employee.actions";
 import TableRow from "../ui/TableRow";
 
-const EmployeeTable = ({
-  employeesData,
-}: {
-  employeesData: {
-    _id: string;
-    name: string;
-    jobTitle: string;
-    department: string;
-    salary: string;
-    email: string;
-    phone: string;
-  }[];
-}) => {
+const EmployeeTable = async ({ query }: { query: string }) => {
+  const employeesData = await fetchFilteredEmployees(query);
   return (
     <div className="overflow-x-auto">
       <table className="table">
