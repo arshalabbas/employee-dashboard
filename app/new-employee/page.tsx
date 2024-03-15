@@ -4,7 +4,7 @@ const Page = () => {
   return (
     <section>
       <h1 className="text-head">New Employee</h1>
-      <EmployeeForm />
+      <EmployeeForm btnTitle="Add Employee" />
     </section>
   );
 };

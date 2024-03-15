@@ -13,6 +13,7 @@ const employeeValidation = z.object({
   phone: z
     .string()
     .min(1, { message: "This field is required" })
+    .regex(/^\d+$/, { message: "Only numbers are allowed" })
     .min(6, { message: "Minimum 6 characters" })
     .max(14, { message: "Invalid phone number" }),
   jobTile: z
@@ -28,6 +29,7 @@ const employeeValidation = z.object({
   salary: z
     .string()
     .min(1, { message: "This field is required" })
+    .regex(/^\d+$/, { message: "Only numbers are allowed" })
     .max(15, { message: "Maximum 15 character" }),
 });
 

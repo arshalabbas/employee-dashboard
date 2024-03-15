@@ -7,26 +7,50 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import TextInput from "../ui/TextInput";
-import { addEmployee } from "@/lib/actions/employee.actions";
+import { updateEmployee } from "@/lib/actions/employee.actions";
+import { useRouter } from "next/navigation";
 
-const EmployeeForm = () => {
+interface Props {
+  btnTitle: string;
+  employee?: {
+    id?: string;
+    name: string;
+    email: string;
+    phone: string;
+    jobTitle: string;
+    department: string;
+    salary: string;
+  };
+}
+
+const EmployeeForm = ({ btnTitle, employee }: Props) => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm<employeeValidationType>({
     resolver: zodResolver(employeeValidation),
+    defaultValues: {
+      name: employee?.name,
+      email: employee?.email,
+      phone: employee?.phone,
+      jobTile: employee?.jobTitle,
+      department: employee?.department,
+      salary: employee?.salary,
+    },
   });
 
   const onSubmit = async (values: employeeValidationType) => {
-    await addEmployee({
+    await updateEmployee({
+      id: employee?.id,
       name: values.name,
       email: values.email,
       phone: values.phone,
       jobTitle: values.jobTile,
       department: values.department,
       salary: values.salary,
-    });
+    }).then(() => router.push("/employees"));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
@@ -44,7 +68,7 @@ const EmployeeForm = () => {
         <TextInput<employeeValidationType>
           register={register}
           name="email"
-          type="email"
+          type="text"
           label="Email"
           placeholder="Enter the email..."
           errorMessage={errors.email?.message}
@@ -92,7 +116,7 @@ const EmployeeForm = () => {
           disabled={isSubmitting}
           className="btn btn-primary btn-wide mt-5"
         >
-          Add User
+          {btnTitle}
         </button>
       </div>
     </form>
