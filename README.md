@@ -2,6 +2,12 @@
 
 Welcome to the Employee Dashboard project! This application provides a dashboard interface for managing employee data. Users can perform various operations related to employees, such as adding, viewing, updating, and deleting employee records.
 
+## Demo
+
+[Employee Dashboard Demo - Click Here](https://employee-dashboard-aa.vercel.app/)
+
+![Screenshot](https://i.ibb.co/qdJzZG5/Screenshot-16-3-2024-2410-employee-dashboard-aa-vercel-app.jpg)
+
 ## Technologies Used
 
 - **Next.js:** A React framework for building server-side rendered applications.
