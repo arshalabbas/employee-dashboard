@@ -1,7 +1,11 @@
+"use client";
+
 import sideBarItems from "@/constants/sideBarItems";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
+  const pathname = usePathname();
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -34,18 +38,21 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label
           htmlFor="my-drawer-3"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu menu-lg p-4 pt-20 w-80 min-h-full bg-base-200">
+        <ul className="menu menu-lg gap-3 p-4 pt-20 w-80 min-h-full bg-base-200">
           {/* Sidebar content here */}
           {sideBarItems.map((item, index) => {
+            const isActive =
+              (pathname.includes(item.route) && item.route.length > 1) ||
+              pathname === item.route;
             return (
               <li key={index}>
-                <Link href={item.route}>
+                <Link href={item.route} className={`${isActive && "active"}`}>
                   <item.Icon className="text-xl" />
                   {item.title}
                 </Link>

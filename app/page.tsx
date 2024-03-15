@@ -3,15 +3,17 @@ import { fetchEmployees } from "@/lib/actions/employee.actions";
 export default async function Home() {
   const employeesData = await fetchEmployees();
 
-  const avgSalary =
+  const avgSalary = Math.trunc(
     employeesData.reduce(
       (accumulator, currentValue) => accumulator + +currentValue.salary,
       0
-    ) / employeesData.length;
-
-  const highestSalary = Math.max(
-    ...employeesData.map((employee) => +employee.salary)
+    ) / employeesData.length
   );
+
+  const highestSalary =
+    employeesData.length > 0
+      ? Math.max(...employeesData.map((employee) => +employee.salary))
+      : 0;
 
   return (
     <section>
@@ -25,7 +27,7 @@ export default async function Home() {
         </div>
         <div className="join-item p-10">
           <p className="text-6xl font-black text-accent text-center">
-            {Math.trunc(avgSalary)}
+            {isNaN(avgSalary) ? 0 : avgSalary}
           </p>
           <p className="text-center opacity-80">Average Salary</p>
         </div>
