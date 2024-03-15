@@ -7,6 +7,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import TextInput from "../ui/TextInput";
+import { addEmployee } from "@/lib/actions/employee.actions";
 
 const EmployeeForm = () => {
   const {
@@ -17,7 +18,16 @@ const EmployeeForm = () => {
     resolver: zodResolver(employeeValidation),
   });
 
-  const onSubmit = (value: employeeValidationType) => {};
+  const onSubmit = async (values: employeeValidationType) => {
+    await addEmployee({
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      jobTitle: values.jobTile,
+      department: values.department,
+      salary: values.salary,
+    });
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
       <div className="flex gap-5 max-sm:flex-col">
