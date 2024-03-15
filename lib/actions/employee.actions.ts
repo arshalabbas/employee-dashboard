@@ -72,7 +72,10 @@ export async function fetchEmployees() {
 }
 
 // function to search Employees by search query
-export async function fetchFilteredEmployees(searchQuery: string) {
+export async function fetchFilteredEmployees(
+  searchQuery: string,
+  sort: boolean
+) {
   try {
     connectToDB();
 
@@ -86,6 +89,9 @@ export async function fetchFilteredEmployees(searchQuery: string) {
         { salary: { $regex: searchQuery, $options: "i" } },
       ],
     });
+
+    if (sort) mongooseQuery.sort({ salary: "asc" });
+    else mongooseQuery.sort({ date: "desc" });
 
     const data = mongooseQuery.exec();
     return data;

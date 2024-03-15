@@ -4,8 +4,14 @@ import {
 } from "@/lib/actions/employee.actions";
 import TableRow from "../ui/TableRow";
 
-const EmployeeTable = async ({ query }: { query: string }) => {
-  const employeesData = await fetchFilteredEmployees(query);
+const EmployeeTable = async ({
+  query,
+  sort,
+}: {
+  query: string;
+  sort: boolean;
+}) => {
+  const employeesData = await fetchFilteredEmployees(query, sort);
   return (
     <div className="overflow-x-auto">
       <table className="table">
