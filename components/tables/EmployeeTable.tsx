@@ -40,6 +40,11 @@ const EmployeeTable = async ({
           ))}
         </tbody>
       </table>
+      {employeesData.length < 1 && (
+        <h1 className="text-center text-2xl text-slate-500/70 font-bold mt-10">
+          {query ? "No search result!" : "No employees yet!"}
+        </h1>
+      )}
     </div>
   );
 };

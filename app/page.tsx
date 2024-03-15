@@ -1,18 +1,38 @@
-export default function Home() {
+import { fetchEmployees } from "@/lib/actions/employee.actions";
+
+export default async function Home() {
+  const employeesData = await fetchEmployees();
+
+  const avgSalary =
+    employeesData.reduce(
+      (accumulator, currentValue) => accumulator + +currentValue.salary,
+      0
+    ) / employeesData.length;
+
+  const highestSalary = Math.max(
+    ...employeesData.map((employee) => +employee.salary)
+  );
+
   return (
     <section>
       <h1 className="text-head">Insights</h1>
-      <div className="join shadow-md">
+      <div className="join join-vertical lg:join-horizontal shadow-md">
         <div className="join-item p-10">
-          <p className="text-6xl font-black text-accent text-center">84</p>
+          <p className="text-6xl font-black text-accent text-center">
+            {employeesData.length}
+          </p>
           <p className="text-center opacity-80">Total Employees</p>
         </div>
         <div className="join-item p-10">
-          <p className="text-6xl font-black text-accent text-center">35000</p>
+          <p className="text-6xl font-black text-accent text-center">
+            {Math.trunc(avgSalary)}
+          </p>
           <p className="text-center opacity-80">Average Salary</p>
         </div>
         <div className="join-item p-10">
-          <p className="text-6xl font-black text-accent text-center">54000</p>
+          <p className="text-6xl font-black text-accent text-center">
+            {highestSalary}
+          </p>
           <p className="text-center opacity-80">Highest Salery</p>
         </div>
       </div>
