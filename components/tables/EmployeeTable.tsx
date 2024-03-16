@@ -13,11 +13,11 @@ const EmployeeTable = async ({
 }) => {
   const employeesData = await fetchFilteredEmployees(query, sort);
   return (
-    <div className="overflow-x-auto">
-      <table className="table">
+    <div className="overflow-x-auto w-full">
+      <table className="table min-md:table-lg">
         <thead>
           <tr>
-            <th></th>
+            <th className="max-sm:hidden"></th>
             <th>Name</th>
             <th>Job</th>
             <th>Salary</th>

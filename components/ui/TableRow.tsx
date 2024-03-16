@@ -36,7 +36,9 @@ const EmployeeDetailsModal = ({
         <div>
           <div>
             <h3 className="text-lg font-black">{employee.name}</h3>
-            <p className="badge badge-secondary">{employee.jobTitle}</p>
+            <p className="badge badge-outline badge-secondary">
+              {employee.jobTitle}
+            </p>
           </div>
           <div className="divider"></div>
           <div>
@@ -89,16 +91,18 @@ const TableRow = ({
 }: Props) => {
   const pathname = usePathname();
   return (
-    <tr>
-      <th>{index + 1}</th>
+    <tr className="hover">
+      <th className="max-sm:hidden">{index + 1}</th>
       <td>{name}</td>
       <td>
         {jobTitle}
         <br />
-        <span className="badge badge-ghost badge-sm">{department}</span>
+        <span className="badge badge-primary badge-outline badge-sm max-sm:hidden">
+          {department}
+        </span>
       </td>
       <td>{salary}</td>
-      <td>
+      <td className="flex max-sm:flex-col">
         <button
           className="btn btn-ghost"
           onClick={() => showEmployeeModal(_id)}
